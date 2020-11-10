@@ -1,0 +1,76 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@using ClassActivity_SearchCriteria_GetPost.Model;
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="@Model.NewStudent.Id" class="control-label"> Id </label>
+            <input asp-for="@Model.NewStudent.Id" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.NewStudent.Name" class="control-label"> Name </label>
+            <input asp-for="@Model.NewStudent.Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.NewStudent.Email" class="control-label"> Email </label>
+            <input asp-for="@Model.NewStudent.Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.NewStudent.Profession" class="control-label"> Profession </label>
+            <select asp-for="@Model.NewStudent.Profession" class="form-control" 
+                    asp-items="Html.GetEnumSelectList<Profession>()">
+
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.NewStudent.Image" class="control-label"> Image </label>
+            <input asp-for="@Model.NewStudent.Image" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            
+        </div>
+    </form>
+</div>
+
+<form method="get">
+    Search:
+    <input type="text" asp-for="SearchCriteria" />
+    <input type="submit" value="filter" />
+    
+
+</form>
+<table class="table">
+  <thead>
+      <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Profession</th>
+          <th>Image</th>
+      </tr>
+  </thead>
+  <tbody>
+      @foreach (var stu in Model.Students.Values)
+      {
+          var imagePath = "/Images/" + @stu.Image;
+      <tr>
+          <td>@stu.Id</td>
+          <td>@stu.Name</td>
+          <td>@stu.Email</td>
+          <td>@stu.Profession</td>
+          <td><img src="@imagePath" /></td>
+      </tr>
+      }
+
+  </tbody>
+</table>
