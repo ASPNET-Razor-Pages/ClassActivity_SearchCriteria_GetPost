@@ -1,0 +1,43 @@
+﻿@page "{Id}"
+@using ClassActivity_SearchCriteria_GetPost.Model
+@model ClassActivity_SearchCriteria_GetPost.Pages.EditPageModel
+@{
+    ViewData["Tile"] = "Edit Students";
+}
+
+<div>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="@Model.EditStudent.Id" class="control-label"> Id </label>
+            <input asp-for="@Model.EditStudent.Id" class="form-control" />        
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EditStudent.Name" class="control-label"> Name </label>
+            <input asp-for="@Model.EditStudent.Name" class="form-control" />
+            <span asp-validation-for="@Model.EditStudent.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EditStudent.Email" class="control-label"> Email </label>
+            <input asp-for="@Model.EditStudent.Email" class="form-control" />
+            <span asp-validation-for="@Model.EditStudent.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EditStudent.Profession" class="control-label"> Profession </label>
+            <select asp-for="@Model.EditStudent.Profession" class="form-control"
+                    asp-items="Html.GetEnumSelectList<Profession>()">
+            </select>
+            <span asp-validation-for="@Model.EditStudent.Profession" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EditStudent.Image" class="control-label"> Image </label>
+            <input asp-for="@Model.EditStudent.Image" class="form-control" />
+            <span asp-validation-for="@Model.EditStudent.Image" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+
+        </div>
+    </form>
+</div>

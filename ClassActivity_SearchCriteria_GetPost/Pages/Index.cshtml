@@ -6,49 +6,77 @@
 @using ClassActivity_SearchCriteria_GetPost.Model;
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome Geori</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 <div>
     <form method="post">
-        <div class="form-group">
-            <label asp-for="@Model.NewStudent.Id" class="control-label"> Id </label>
-            <input asp-for="@Model.NewStudent.Id" class="form-control" />
-        </div>
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+
+
         <div class="form-group">
             <label asp-for="@Model.NewStudent.Name" class="control-label"> Name </label>
             <input asp-for="@Model.NewStudent.Name" class="form-control" />
+            <span asp-validation-for="@Model.NewStudent.Name" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="@Model.NewStudent.Email" class="control-label"> Email </label>
             <input asp-for="@Model.NewStudent.Email" class="form-control" />
+            <span asp-validation-for="@Model.NewStudent.Email" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="@Model.NewStudent.Profession" class="control-label"> Profession </label>
-            <select asp-for="@Model.NewStudent.Profession" class="form-control" 
+            <select asp-for="@Model.NewStudent.Profession" class="form-control"
                     asp-items="Html.GetEnumSelectList<Profession>()">
-
             </select>
+            <span asp-validation-for="@Model.NewStudent.Profession" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="@Model.NewStudent.Image" class="control-label"> Image </label>
-            <input asp-for="@Model.NewStudent.Image" class="form-control" />
+            <select asp-for="@Model.NewStudent.Image" class="form-control">
+                <option value="">Select an Image</option>
+                <option value="alex.jpg">John</option>
+                <option value="john.jpg">alex</option>
+                <option value="malina.jpg">nilma</option>
+                <option value="nilma.jpg">malina</option>
+            </select>
+              <span asp-validation-for="@Model.NewStudent.Image" class="text-danger"></span>
         </div>
+        @*<div class="form-group">
+            <label asp-for="@Model.NewStudent.Image" class="control-label"> Image </label>
+            <select asp-for="@Model.NewStudent.Image"  class="form-control">
+                <option value="" >select an Image </option>
+                <option value="alex.jpg"> alex</option>
+                <option value="malina.jpg">malina</option>
+                <option value="nilma.jpg">nilma</option>
+                <option value="john.jpg">john</option>
+            </select>
+            <span asp-validation-for="@Model.NewStudent.Image" class="text-danger"></span>
+        </div>*@
 
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-primary" />
-            
+
         </div>
     </form>
 </div>
 
 <form method="get">
+Search: 
+    <input type="text" asp-for="SearchCriteria" />
+    <input type="submit" value="Filter" />
+</form>
+
+
+
+
+@*<form method="get">
     Search:
     <input type="text" asp-for="SearchCriteria" />
     <input type="submit" value="filter" />
-    
+</form>*@
 
-</form>
+
 <table class="table">
   <thead>
       <tr>
@@ -57,6 +85,7 @@
           <th>Email</th>
           <th>Profession</th>
           <th>Image</th>
+          <th>Action</th>
       </tr>
   </thead>
   <tbody>
@@ -69,6 +98,7 @@
           <td>@stu.Email</td>
           <td>@stu.Profession</td>
           <td><img src="@imagePath" /></td>
+          <td><a asp-page="EditPage" class="btn btn-primary" asp-route-id="@stu.Id" >Edit </a></td>
       </tr>
       }
 
