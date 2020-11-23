@@ -14,17 +14,18 @@ namespace ClassActivity_SearchCriteria_GetPost.Pages
         [BindProperty]
         public Student EditStudent { get; set; }
 
-        public FakeRepo _repo;
-        public EditPageModel(FakeRepo repo)
+        // Fakerepo object reference
+        private FakeRepo repo;
+        public EditPageModel()
         {
              EditStudent = new Student();
-            _repo = repo;
+            repo = FakeRepo.Instance;
             
         }
         public IActionResult OnGet(int id)
         {
             
-            EditStudent = _repo.GetStudentById(id);
+            EditStudent = repo.GetStudentById(id);
 
             return Page(); ;
         }
@@ -37,7 +38,7 @@ namespace ClassActivity_SearchCriteria_GetPost.Pages
             }
             if(EditStudent != null)
             {
-                _repo.UpdateStudent(EditStudent);
+                repo.UpdateStudent(EditStudent);
             }
 
             return RedirectToPage("Index");

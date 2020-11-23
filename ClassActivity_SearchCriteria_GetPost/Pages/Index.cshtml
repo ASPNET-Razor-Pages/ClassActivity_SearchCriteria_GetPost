@@ -41,18 +41,7 @@
                 <option value="nilma.jpg">Nilma</option>
             </select>
               <span asp-validation-for="@Model.NewStudent.Image" class="text-danger"></span>
-        </div>
-        @*<div class="form-group">
-            <label asp-for="@Model.NewStudent.Image" class="control-label"> Image </label>
-            <select asp-for="@Model.NewStudent.Image"  class="form-control">
-                <option value="" >select an Image </option>
-                <option value="alex.jpg"> alex</option>
-                <option value="malina.jpg">malina</option>
-                <option value="nilma.jpg">nilma</option>
-                <option value="john.jpg">john</option>
-            </select>
-            <span asp-validation-for="@Model.NewStudent.Image" class="text-danger"></span>
-        </div>*@
+        </div>       
 
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-primary" />
@@ -66,16 +55,6 @@ Search:
     <input type="text" asp-for="SearchCriteria" />
     <input type="submit" value="Filter" />
 </form>
-
-
-
-
-@*<form method="get">
-    Search:
-    <input type="text" asp-for="SearchCriteria" />
-    <input type="submit" value="filter" />
-</form>*@
-
 
 <table class="table">
   <thead>

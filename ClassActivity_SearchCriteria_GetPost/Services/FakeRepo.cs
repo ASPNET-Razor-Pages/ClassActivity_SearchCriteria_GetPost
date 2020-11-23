@@ -1,15 +1,25 @@
 ﻿using ClassActivity_SearchCriteria_GetPost.Model;
-using Microsoft.AspNetCore.SignalR.Protocol;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ClassActivity_SearchCriteria_GetPost.Services
 {
     public class FakeRepo
     {
         public Dictionary<int, Student> Students { get; set; }
+
+        private static FakeRepo _instance;
+        public static FakeRepo Instance
+        {          
+            get
+            {
+                if(_instance == null)
+                {
+                    _instance = new FakeRepo();
+                }
+                return _instance;
+            }
+        }
         public FakeRepo()
         {
             // first object reference
@@ -34,21 +44,7 @@ namespace ClassActivity_SearchCriteria_GetPost.Services
         }
 
         // Search Mechanism
-        //public Dictionary<int, Student> FilterName(string searchCriteria)
-        //{
-        //    Dictionary<int, Student> result = new Dictionary<int, Student>();
-        //    foreach(var student in Students.Values)
-        //    {
-        //        if (student.Name.StartsWith(searchCriteria))
-        //        {
-        //            result.Add(student.Id, student);
-        //        }
-        //    }
-
-        //    return result;
-        //}
-         
-        // 
+       
         public Student GetStudentById(int id)
         {
             Student getStudentById = null;

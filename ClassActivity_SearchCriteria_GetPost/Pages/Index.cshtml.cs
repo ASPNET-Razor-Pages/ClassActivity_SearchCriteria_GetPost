@@ -13,52 +13,34 @@ namespace ClassActivity_SearchCriteria_GetPost.Pages
     public class IndexModel : PageModel
     {
         [BindProperty(SupportsGet =true)]
-        public string SearchCriteria { get; set; }
-       
-        // Target property for UI 
-        // This property we use when we display collection of objects first time in a Page
+        public string SearchCriteria { get; set; }       
         public Dictionary<int, Student> Students { get; set; }
-
-        // Target property for Post Method 
-        // This property we use when we make a Post request of form
-        // Adding new Resource information 
+      
         [BindProperty]
-        public Student NewStudent { get; set; }
+        public Student NewStudent { get; set; }       
 
-        // search criteri property - target property
-        //[BindProperty(SupportsGet =true)]
-
-        //// This property we use when we make a Search of specific objects
-        //public string SearchCriteria { get; set; }
-
-        public FakeRepo Repo;
-        public IndexModel(FakeRepo repo)
+        // Fakerepo object reference
+        private FakeRepo repo;
+        public IndexModel()
         {
-            Repo = repo;
+            // here we called singelton pattern instance ( we need always current updated instance which is only possible through this design pattern)
+            // Page to page communication we need always updated instance of Fakerepo which possible by through this means.
+            repo = FakeRepo.Instance;
             //when we use dependency Injection we dont need to create an FakeRepo object instance in a constructor 
             // repo = new FakeRepo();
             // Here are we call the GetAllStudents method to retrieve current Dictionary Object List
-             Students = Repo.GetAllStudents();
+             Students = repo.GetAllStudents();
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             if (!String.IsNullOrEmpty(SearchCriteria))
             {
-               Students = Repo.FilterName(SearchCriteria);
+               Students = repo.FilterName(SearchCriteria);
             }
+            return Page();
         }
-        //public IActionResult OnGet()
-        //{
-        //    if(!String.IsNullOrEmpty(SearchCriteria))
-        //    {
-        //        // Here we update Students property with current searching criteria
-        //        Students = Repo.FilterName(SearchCriteria);
-        //    }
-        //    // fill up with data or information
-        //    return Page();
-        //}
-
+        
         // Add new Resource we need to create post method 
 
         public IActionResult OnPost()
@@ -67,9 +49,9 @@ namespace ClassActivity_SearchCriteria_GetPost.Pages
             if(ModelState.IsValid)
             {
                 // here we adding new Resource
-                Repo.AddNewStudent(NewStudent);
+                repo.AddNewStudent(NewStudent);
                 // When we added new information , we need to retrieve updated List to show on the screen  
-                Students = Repo.GetAllStudents();
+                Students = repo.GetAllStudents();
             }
             return Page();
         }
